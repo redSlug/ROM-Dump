@@ -49,7 +49,7 @@ void loop() {
 
   for (unsigned long i = 0; i<highest_address_we_can_afford; i++) {
     
-    // A0 to A10 are coming from the arduino directly
+    // A0 to A10 are coming from the Arduino directly
     for (unsigned long j = 0; j < 11; j++) {
       if (i & (1 << j)) {
         digitalWrite(j + 2, HIGH);
@@ -58,7 +58,7 @@ void loop() {
       }   
     }  
 
-     // writing hightest bits, A11 to A18 to MC140158
+     // writing highest bits, A11 to A18 to MC140158
      // A19 goes to ground
      unsigned long low_bits_overflow_threshold = 1L << 11;
      if (i % low_bits_overflow_threshold == 0) {
@@ -74,55 +74,49 @@ void loop() {
   }
 }
 
-
   // SNES  32pin ROM mapping https://www.caitsith2.com/snes/flashcart/cart-chip-pinouts.html#rom
+  // CS Chip select - if you have multiple chips on same wire,
+  // can share bus lines, feature of SNES ROM chip set to 0 because not using
 
   // SIDE 1
   // pin1   MC140158 4          A17
-  // pin2   MC140158 5          A18 (highest bit) 
+  // pin2   MC140158 5 / Ground A18 (highest bit / unused - not enough pins)
   // pin3   MC140158 10         A15  
   // pin4   MC140158 11         A12
   // pin5   Arduino 9           A7
   // pin6   Arduino 8           A6
-  
   // pin7   Arduino 7           A5
   // pin8   Arduino 6           A4
   // pin9   Arduino 5           A3
   // pin10  Arduino 4           A2
   // pin11  Arduino 3           A1
   // pin12  Arduino 2           A0
-
   // pin13  Saleae              D0  (data - lowest output pin)
-  // pin14  Saleae                    D1
-  // pin15  Saleae                    D2
-  // pin16      ground          Vss
-
+  // pin14  Saleae              D1
+  // pin15  Saleae              D2
+  // pin16  ground              Vss
 
   // SIDE 2
-  // pin32                      Vcc (5V_ energy)
-  // pin31    Arduino 13        /OE (Output Enabled)
-  // pin30    Ground            A19 (not used, not enough output pins) <<<<-->>>> now mapping to +
-  // pin29    MC140158 13       A14
-  // pin28    MC140158 12       A13
-  // pin27    Arduino 10        A8
-  // pin26    Arduino 11        A9
-  // pin25    MC140158 2        A11 
-  // pin24    MC140158 3        A16
-  // pin23    Arduino 12        A10
-  // pin22    Ground            /CS (Chip select - if you have multiple chips on same wire, can share bus lines, feature of SNES ROM chip we have to set to 0 because we're not using it)
+  // pin32  5V_ energy          Vcc
+  // pin31  Arduino 13          /OE (Output Enabled)
+  // pin30  Ground / MC140158 5 A19 (unused - not enough pins / highest bit)
+  // pin29  MC140158 13         A14
+  // pin28  MC140158 12         A13
+  // pin27  Arduino 10          A8
+  // pin26  Arduino 11          A9
+  // pin25  MC140158 2          A11
+  // pin24  MC140158 3          A16
+  // pin23  Arduino 12          A10
+  // pin22  Ground              /CS
+  // pin21  Saleae              D7
+  // pin20  Saleae              D6
+  // pin19  Saleae              D5
+  // pin18  Saleae              D4
+  // pin17  Saleae              D3
 
-  // pin21  Saleae                    D7
-  // pin20                      D6
-  // pin19                      D5
-  // pin18                      D4
-  // pin17                      D3
-
-
-  // Arduino            MC140158        SNES           
-  // 0 -> STP Clock
-  // 1 -> STP Data        ->            A11 -> A18 
-  // 0 -> STP Clock      MC140158 pin 9              
-  // 1 -> STP Data              MC140158 pin 7     (controls pins A11 through A18)
+  // Arduino     MC140158           SNES
+  // 0           STP Clock pin 9
+  // 1           STP Data  pin 7    (controls pins A11 through A18)
 
   // MC140158  SNES
   // 2          A11        
@@ -135,16 +129,16 @@ void loop() {
   // 4          A17
   // 5          A18  
 
-  // Ard  SNES
-  // 2 -> A0
-  // 3 -> A1
-  // 4 -> A2
-  // 5 -> A3
-  // 6 -> A4
-  // 7 -> A5
-  // 8 -> A6
-  // 9 -> A7
-  // 10 -> A8
-  // 11 -> A9
-  // 12 -> A10
-  // 13 -> OE / Output Enabled
+  // Arduino    SNES
+  // 2          A0
+  // 3          A1
+  // 4          A2
+  // 5          A3
+  // 6          A4
+  // 7          A5
+  // 8          A6
+  // 9          A7
+  // 10         A8
+  // 11         A9
+  // 12         A10
+  // 13         OE / Output Enabled
