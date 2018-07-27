@@ -3,14 +3,14 @@
 Scripts and code for ROM dump.
 
 ## Bash commands used
-Copies first 2**19 bytes; the size of the ROM because there are 19 address bits; copies without filesystem `/usr/share/file/magic`
-```bash
-dd if=rom.bin of=rom_low_clean.bin bs=1 count=$((2**19))
-```
-
 Breaks binary into smaller, viewable image files, with headers
 ```bash
 for n in $(seq 0 10); do dd if=../legend.bin skip=$(($n * 80000)) bs=1 count=80000 of=$n.bin; echo "P4 8 10000 " > $n.pgm; cat $n.bin >> $n.pgm; done
+```
+
+Copies first 2**19 bytes; the size of the ROM because there are 19 address bits; copies without filesystem `/usr/share/file/magic`
+```bash
+dd if=rom.bin of=rom_low_clean.bin bs=1 count=$((2**19))
 ```
 
 Rename using curlies
