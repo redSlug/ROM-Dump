@@ -8,12 +8,12 @@ Copies first 2**19 bytes; the size of the ROM because there are 19 address bits;
 dd if=rom.bin of=rom_low_clean.bin bs=1 count=$((2**19))
 ```
 
-Breaking binary into smaller image files, and adding headers
+Breaks binary into smaller image files, adds headers
 ```bash
 for n in $(seq 0 10); do dd if=../legend.bin skip=$(($n * 80000)) bs=1 count=80000 of=$n.bin; echo "P4 8 10000 " > $n.pgm; cat $n.bin >> $n.pgm; done
 ```
 
-Renaming
+Rename with curlies
 ```bash
 mv full_dump_d0_d5_{falling,rising}_edge.txt
 ```
