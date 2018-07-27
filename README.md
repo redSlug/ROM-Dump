@@ -35,9 +35,9 @@ Thank you [Cameron](https://github.com/cfinucane) for pairing with me on this, y
 
 Thank you [Avery](https://github.com/AveryEMcG) for being a super awesome person, for sharing your hardware expertise and your game console wisdom!
 
-Thank you [Ben](https://twitter.com/benjojo12) and [Steven](https://github.com/SlySteven) for reviewing this blog post and providing valuable feedback!
+Thank you [Ben](https://twitter.com/benjojo12), [Steven](https://github.com/SlySteven) and Cameron for reviewing the related blog post and providing valuable feedback!
 
-Thank you [Phoebe](https://twitter.com/f2xeb) for your wonderful talk that expired this exploration!
+Thank you [Phoebe](https://twitter.com/f2xeb) for your wonderful talk that inspired this exploration!
 
 Thank you [Recurse Center](https://www.recurse.com/) for providing the space and tools to make this happen!
 
