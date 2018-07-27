@@ -11,7 +11,7 @@ length = 2**20
 bit0_6 = 0x7F
 bit_6 = 0x40
 
-# shifting bit 6 to bit 7
+# shifting bit 6 to bit 7, and stitching low and high bits for each byte
 rom = bytes(((high & bit_6)) << 1 | (low & bit0_6) for low, high in zip(low_bits_measured[:length], high_bits_measured[:length]))
 with open('rom_full.bin', 'wb') as f:
     f.write(rom)
@@ -19,7 +19,7 @@ with open('rom_full.bin', 'wb') as f:
 
 # verify
 with open('rom_official.bin', 'rb') as f:
-    actual_rom = f.read()[:2**19]
+    actual_rom = f.read()[:length]
 
 first_6_bit_mask = 0x3F
 full_mask = 0xFF
@@ -29,3 +29,4 @@ diffing_indices = [(i, a, b) for i, (a, b) in enumerate(zip(rom[:length], actual
 print(length)
 print(len(diffing_indices))
 # 14056 / 531007 = 3% noisy with falling edge
+# 0 / 531007 = 0% noisy with rising edge

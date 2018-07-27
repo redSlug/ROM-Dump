@@ -101,7 +101,7 @@ void loop() {
   // SIDE 2
   // pin32  5V_ energy          Vcc
   // pin31  Arduino 13          /OE (Output Enabled)
-  // pin30  Arduino A0        A19 (highest bit)
+  // pin30  Arduino A0          A19 (highest bit)
   // pin29  MC140158 13         A14
   // pin28  MC140158 12         A13
   // pin27  Arduino 10          A8
